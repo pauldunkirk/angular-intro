@@ -52,7 +52,7 @@ phirePhiterApp.controller('PhirePhiterController', function() {
             "githuburl": "https://github.com/edwippler"
         },
         {
-            "nafirstNameme": "Jonny",
+            "firstName": "Jonny",
             "lastName": "Holupchinski",
             "git_username": "jonholup",
             "shoutout": "Yo!",
@@ -154,7 +154,7 @@ phirePhiterApp.controller('PhirePhiterController', function() {
 
     self.createPerson = function() {
         console.log(self.newPerson);
-        self.people.push(angular.copy(self.newPerson));
+        self.people.unshift(angular.copy(self.newPerson));
     }; //end createPerson function
 
 }); // end controller function

@@ -11,13 +11,10 @@
 
 <body>
     <main ng-app="PhirePhiterApp" ng-controller="PhirePhiterController as phirePhiter">
-
         <section class="container">
             <h1>PhirePhiter's Angular List</h1>
             <h3>Add a new person</h3>
-
             <form class="col-md-12">
-
                 <div class="form-group col-md-6">
                     <label for="firstName">First Name</label>
                     <input type="text" name="firstName" class="form-control" ng-model="phirePhiter.newPerson.firstName" placeholder="First Name" />
@@ -37,25 +34,47 @@
                 <!-- What other fields do we need to ask for in order to get the information we need? -->
             </form>
             <button ng-click="phirePhiter.createPerson()">Add New PhirePhiter</button>
-
         </section>
-
 
         <section class="container">
             <h3>Class List</h3>
-
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="thing in phirePhiter.people">
-                    <!-- What needs to be repeated? -->
-                    <!-- Create a list item for everyone in the class -->
-
-
-                  <p><a ng-href="{{thing.imageURL}}">{{thing.firstName + ' ' + thing.lastName}}</a>, known on GitHub as <a ng-href="{{thing.githuburl}}">{{thing.git_username}}</a> says, "{{thing.shoutout + '!" '}}</p>
-                    <!-- include the other parameters for the person -->
-                    <!-- thing is an object like { name: 'hockey', happinessPoints: 1500000 } -->
+                    <p><a ng-href="{{thing.imageURL}}">{{thing.firstName + ' ' + thing.lastName}}</a>, known on GitHub as <a ng-href="{{thing.githuburl}}">{{thing.git_username}}</a> says, "{{thing.shoutout + '!" '}}</p>
                 </li>
             </ul>
 
+<!-- got the below from https://docs.angularjs.org/api/ng/filter/filter and altered to fit our situation -->
+            <label>Search: <input ng-model="searchText"></label>
+            <table id="searchTextResults">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Shout Out</th>
+                </tr>
+                <tr ng-repeat="x in phirePhiter.people | filter:searchText">
+                    <td>{{x.firstName}}</td>
+                    <td>{{x.lastName}}</td>
+                    <td>{{x.shoutout}}</td>
+                </tr>
+            </table>
+            <hr>
+            <label>Any: <input ng-model="search.$"></label> <br>
+            <label>Search by First Name <input ng-model="search.firstName"></label><br>
+            <label>Search by Last Name <input ng-model="search.lastName"></label><br>
+            <label>Search by Shout Out <input ng-model="search.shoutout"></label><br>
+            <table id="searchObjResults">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Shout Out</th>
+                </tr>
+                <tr ng-repeat="y in phirePhiter.people | filter:search:strict">
+                    <td>{{y.firstName}}</td>
+                    <td>{{y.lastName}}</td>
+                    <td>{{y.shoutout}}</td>
+                </tr>
+            </table>
         </section>
     </main>
 </body>
