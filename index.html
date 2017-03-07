@@ -1,34 +1,61 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>Angular Basics</title>
-  <script type="text/javascript" src="vendors/angular.min.js"></script>
-  <script type="text/javascript" src="scripts/client.js"></script>
-  <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Angular Basics</title>
+    <script type="text/javascript" src="vendors/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/client.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
 </head>
+
 <body>
-  <main ng-app="PhirePhiterApp" ng-controller="PhirePhiterController as phirePhiter">
-    <section class="container">
-      <h1>PhirePhiter's angular list</h1>
-      <h3>Add a new person</h3>
-      <form class="col-md-12">
-        <div class="form-group col-md-6">
-          <label for="firstName">First Name</label>
-          <input type="text" name="firstName" class="form-control" ng-model="phirePhiter.newPerson.firstName" placeholder="First Name"/>
-        </div>
-        <!-- What other fields do we need to ask for in order to get the information we need? -->
-      </form>
-    </section>
-    <section class="container">
-      <h3>Class List</h3>
-      <ul class="list-group">
-        <li class="list-group-item" ng-repeat=""> <!-- What needs to be repeated? -->
-          <!-- TODO: Create a list item for everyone in the class -->
-          {{person.firstName}}<!-- include the other parameters for the person -->
-        </li>
-      </ul>
-    </section>
-  </main>
+    <main ng-app="PhirePhiterApp" ng-controller="PhirePhiterController as phirePhiter">
+
+        <section class="container">
+            <h1>PhirePhiter's Angular List</h1>
+            <h3>Add a new person</h3>
+
+            <form class="col-md-12">
+
+                <div class="form-group col-md-6">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" class="form-control" ng-model="phirePhiter.newPerson.firstName" placeholder="First Name" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="firstName">Last Name</label>
+                    <input type="text" name="lastName" class="form-control" ng-model="phirePhiter.newPerson.lastName" placeholder="Last Name" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="firstName">GitHub User Name</label>
+                    <input type="text" name="git_username" class="form-control" ng-model="phirePhiter.newPerson.git_username" placeholder="GitHub User Name" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="firstName">Shout Out</label>
+                    <input type="text" name="shoutout" class="form-control" ng-model="phirePhiter.newPerson.shoutout" placeholder="Shout Out" />
+                </div>
+                <!-- What other fields do we need to ask for in order to get the information we need? -->
+            </form>
+            <button ng-click="phirePhiter.createPerson()">Add New PhirePhiter</button>
+
+        </section>
+
+
+        <section class="container">
+            <h3>Class List</h3>
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="thing in phirePhiter.people">
+                    <!-- What needs to be repeated? -->
+                    <!-- Create a list item for everyone in the class -->
+                    {{thing.firstName + ' ' + thing.lastName + ', known on GitHub as '+ thing.git_username + ', says, " ' + thing.shoutout + '!" '}}
+                    <!-- include the other parameters for the person -->
+                    <!-- thing is an object like { name: 'hockey', happinessPoints: 1500000 } -->
+                </li>
+            </ul>
+
+        </section>
+    </main>
 </body>
+
 </html>
